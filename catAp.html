@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Cat Generator</title>
+    <style>
+        body {
+            background-color: rgb(9, 54, 9);
+            text-align: center;
+            color: rgb(7, 150, 7);
+            font-family: Arial, sans-serif;
+        }
+
+        #title {
+            font-size: 24pt;
+            margin: 20px;
+        }
+
+        #click1, #click2 {
+            background-color: black;
+            color: white;
+            border-radius: 5%;
+            padding: 10px 20px;
+            margin-left: 250px;
+            margin-right: 250px;
+            cursor: pointer;
+            box-shadow: 0 0 .2rem #fff, 0 0 .2rem #fff, 0 0 2rem #13fe6d, 0 0 0.8rem;
+            font-size: 14px;
+        }
+
+        #click1 { 
+            margin-right: 20px; 
+        }
+        #catImage {
+            margin-top: 20px;
+            max-width: 500px;
+            max-height: 200px;
+            box-shadow: 0 0 .2rem #fff, 0 0 .2rem #fff, 0 0 2rem #13fe6d, 0 0 0.8rem;
+        }
+
+        footer {
+            margin-top: 350px;
+            padding: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">CAT GENERATOR</h1>
+
+    <button id="click1" onclick="generateCat()">Generate Cat</button>
+    <button id="click2" onclick="">Home Page</button>
+
+    <br><br>
+    <img id="catImage" src="http://thecatapi.com/api/images/get?format=src&type=gif" alt="Random Cat GIF"> 
+    <!--alt="Random Cat GIF" is alternative text in case the image fails to load.-->
+
+
+    <footer>
+        <p>My Social Networks! © MinheeKim</p>
+    </footer>
+
+    <script>
+        function generateCat() {
+            document.getElementById("catImage").src = "http://thecatapi.com/api/images/get?format=src&type=gif&random=" + Math.random();
+        }
+    </script>
+</body>
+</html>
