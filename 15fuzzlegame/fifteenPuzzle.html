@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle</title>
+</head>
+<body>
+    <center><h1> Fifteen Puzzle</h1></center>
+    <p>The goal of the fifteen puzzle is to un-jumble its fifteen squares by repeatedly making moves that slide squares into the empty space. How quickly can you solve it?</p>
+
+    <center>
+        <div class="grid-container">
+            <!-- Row 1 -->
+            <div class="grid-item" data-id="0"><span>1</span><img src="mario.png" style="top: 0; left: 0;"></div>
+            <div class="grid-item" data-id="1"><span>2</span><img src="mario.png" style="top: 0; left: -100px;"></div>
+            <div class="grid-item" data-id="2"><span>3</span><img src="mario.png" style="top: 0; left: -200px;"></div>
+            <div class="grid-item" data-id="3"><span>4</span><img src="mario.png" style="top: 0; left: -300px;"></div>
+
+            <!-- Row 2 -->
+            <div class="grid-item" data-id="4"><span>5</span><img src="mario.png" style="top: -100px; left: 0;"></div>
+            <div class="grid-item" data-id="5"><span>6</span><img src="mario.png" style="top: -100px; left: -100px;"></div>
+            <div class="grid-item" data-id="6"><span>7</span><img src="mario.png" style="top: -100px; left: -200px;"></div>
+            <div class="grid-item" data-id="7"><span>8</span><img src="mario.png" style="top: -100px; left: -300px;"></div>
+
+            <!-- Row 3 -->
+            <div class="grid-item" data-id="8"><span>9</span><img src="mario.png" style="top: -200px; left: 0;"></div>
+            <div class="grid-item" data-id="9"><span>10</span><img src="mario.png" style="top: -200px; left: -100px;"></div>
+            <div class="grid-item" data-id="10"><span>11</span><img src="mario.png" style="top: -200px; left: -200px;"></div>
+            <div class="grid-item" data-id="11"><span>12</span><img src="mario.png" style="top: -200px; left: -300px;"></div>
+
+            <!-- Row 4 -->
+            <div class="grid-item" data-id="12"><span>13</span><img src="mario.png" style="top: -300px; left: 0;"></div>
+            <div class="grid-item" data-id="13"><span>14</span><img src="mario.png" style="top: -300px; left: -100px;"></div>
+            <div class="grid-item" data-id="14"><span>15</span><img src="mario.png" style="top: -300px; left: -200px;"></div>
+            <div class="grid-item empty" data-id="15"><span></span></div> <!-- Empty tile -->
+        </div>
+    </center>
+    <center><button id="puzzleButton">Shuffle</button></center>
+    <p>American puzzle author and mathematician Sam Loyd is often falsely credited with creating the puzzle; indeed, Loyd claimed from 1891 until his death in 1911 that he invented it. The puzzle was actually created around 1874 by Noyes Palmer Chapman, a postmaster in Canastota, New York.</p>
+
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            width: 400px;
+            height: 400px;
+            position: relative;
+            border: 2px solid black;
+        }
+
+        .grid-item {
+            position: relative;
+            border: 2px solid black;
+            overflow: hidden;
+        }
+
+        .grid-item img {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .grid-item span {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: black;
+            font-weight: bold;
+            font-size: 20px;
+            z-index: 1;
+        }
+
+        .grid-item.empty {
+            background: white;
+        }
+    </style>
+
+    <script>
+        const gridItems = Array.from(document.querySelectorAll('.grid-item'));//from html
+        let emptyIndex = 15; // Index of the empty tile
+
+        function checkSolved() {
+            const correctOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+            const currentOrder = gridItems.map(item => parseInt(item.dataset.id));
+            //function(item) {
+            //return parseInt(item.dataset.id);
+            // }
+
+            //map 메서드는 기존 배열의 각 요소에 함수를 적용하여 새 배열을 만드는 데 사용됩니다.
+            //여기서 gridItems는 타일(DOM 요소) 배열이며, 각 타일의 data-id 속성(그리드에서 해당 타일의 위치를 ​​나타냄)을 추출해야 합니다.
+            // parseInt 사용해서 문자열을 숫자열로. 
+            if (JSON.stringify(currentOrder) === JSON.stringify(correctOrder)) {
+                //Converts both arrays (currentOrder and correctOrder) into strings so they can be compared accurately.
+                // string 을 이용해서 보는 이유: 더 간단하고 runtime 줄이기 위해서. 
+
+                alert('You Won!');
+            }
+            // to check whether the puzzle have a right position. 
+        }
+
+        function swapTiles(indexA, indexB) {
+            const tempContent = gridItems[indexA].innerHTML;
+            //innerHTML is a property of DOM elements that represents all the HTML content inside an element.
+            //It allows you to read or modify the entire content (HTML, text, or child elements) of an element
+            gridItems[indexA].innerHTML = gridItems[indexB].innerHTML;
+            gridItems[indexB].innerHTML = tempContent;
+
+            const tempId = gridItems[indexA].dataset.id;
+            //Swapping dataset.id values updates the logical order of the tiles in the game (not just their appearance).
+            gridItems[indexA].dataset.id = gridItems[indexB].dataset.id;
+            gridItems[indexB].dataset.id = tempId;
+
+            if (gridItems[indexA].classList.contains('empty')) {
+                gridItems[indexA].classList.remove('empty');
+                gridItems[indexB].classList.add('empty');
+            } else if (gridItems[indexB].classList.contains('empty')) {
+                gridItems[indexB].classList.remove('empty');
+                gridItems[indexA].classList.add('empty');
+            }
+
+//  Summary of swapTiles
+// innerHTML: Swaps the visual content (number and image) between two tiles.
+// dataset.id:Updates the logical positions of the tiles for game logic, such as checking the solved state.
+// classList: Moves the empty class to the new position of the empty tile, ensuring the game behaves correctly and the empty tile is visually marked.
+
+        }
+
+        function shufflePuzzle() {
+            for (let i = 0; i < 1000; i++) {
+                //1000 iterations guarantee that the empty tile moves enough to shuffle the puzzle effectively.
+
+                const possibleMoves = [];
+                const emptyRow = Math.floor(emptyIndex / 4);
+                const emptyCol = emptyIndex % 4;
+                // emptyRow: Determines the row of the empty tile (integer division by 4).
+                // emptyCol: Determines the column of the empty tile (remainder of division by 4).
+
+                gridItems.forEach((tile, index) => {
+                    //forEach in Detail
+//Purpose: Loops through all tiles to find which ones are valid moves
+
+                    const row = Math.floor(index / 4);
+                    const col = index % 4;
+                    // to find out 몇 행 몇 줄에 빈칸이 위치 해있는지
+                    if (
+                        (Math.abs(emptyRow - row) === 1 && emptyCol === col) || 
+                        (Math.abs(emptyCol - col) === 1 && emptyRow === row)
+                        //emptyindex에 위 아래 또는 왼쪽 오른쪽에 위치한 인덱스가 있을시 possible moves 에 푸쉬
+                    ) {
+                        possibleMoves.push(index);
+                    }
+                });
+
+                const randomMove = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+                //math.random을 사용해 0 에서 1까지 아무숫자를 골라 길이와 곱해서 나온 값을 선택하고 
+                //만약 Math.random()이 0.2를 생성했다면:
+
+                    // Math.random() = 0.2
+                    // Math.random() * 2 = 0.4
+                    // Math.floor(0.4) = 0
+                    // possibleMoves[0] = 11
+                    // randomMove = 11
+                    // 선택된 타일은 **11**이 됩니다.
+
+                swapTiles(randomMove, emptyIndex);
+                emptyIndex = randomMove;
+            }
+        }
+
+        function handleTileClick(event) {
+            const clickedTile = event.target.closest('.grid-item');
+            //Ensures that the selected tile is the <div class="grid-item">, regardless of whether the player clicked on the <span> (number) or <img> (image).
+            const clickedIndex = gridItems.indexOf(clickedTile);
+            //Finds the position of the clicked tile (clickedTile) in the gridItems array.
+            const emptyRow = Math.floor(emptyIndex / 4);
+            const emptyCol = emptyIndex % 4;
+            const clickedRow = Math.floor(clickedIndex / 4);
+            const clickedCol = clickedIndex % 4;
+
+            if (
+                (Math.abs(emptyRow - clickedRow) === 1 && emptyCol === clickedCol) || 
+                (Math.abs(emptyCol - clickedCol) === 1 && emptyRow === clickedRow)
+            ) {
+                swapTiles(clickedIndex, emptyIndex);
+                emptyIndex = clickedIndex;
+                checkSolved();
+            }
+        }
+
+        document.getElementById('puzzleButton').addEventListener('click', shufflePuzzle);
+        gridItems.forEach(tile => tile.addEventListener('click', handleTileClick));
+    </script>
+</body>
+</html>

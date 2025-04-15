@@ -1,0 +1,5 @@
+
+[[redirects]]
+  from = "/*"
+  to = "/shoppinglist.html"
+  status = 200

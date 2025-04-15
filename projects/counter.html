@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <title>Counter </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="">
+    <style>
+        body {
+            background-color: grey;
+            transition: background-color 0.5s ease;
+            display: flex; /* Use flexbox for alignment */
+            flex-direction: column; /* Stack elements vertically */
+            align-items: center; /* Center horizontally */
+            justify-content: center; /* Center vertically */
+            height: 100vh; /* Full viewport height */
+            margin: 0;
+        }
+    
+        h1 {
+            color: green;
+            margin: 0;
+            font-size: 2rem;
+        }
+    
+        #main {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    
+        .function1 {
+            margin: 10px; /* Add spacing between buttons */
+           /* Add padding for button size */
+            border-radius: 8px;
+            font-size: 1rem;
+            
+        }
+    </style>
+        <body>
+           <strong><div id = "main">Counter</div></strong> 
+           <strong><h1 id="counter">3</h1></strong>
+            <button id="decrease" class="function1" >Decrease</button>
+            <button id="reset" class="function1" >Reset</button>
+            <button id="increase" class="function1" >Increase</button>
+        
+            <script>
+
+                let currentNumber = 3; 
+                
+                
+                function updateDisplay() {
+                    document.getElementById("counter").innerText = currentNumber;
+                }
+        
+                
+                function decreaseNumber() {
+                    currentNumber--; 
+                    updateDisplay();
+                    changeBackgroundColor("black");
+                    
+                    
+                }
+        
+                
+                function resetNumber() {
+                    currentNumber = 0; 
+                    updateDisplay(); 
+                    changeBackgroundColor("white");
+                }
+        
+                
+                function increaseNumber() {
+                    currentNumber++; 
+                    updateDisplay();
+                    changeBackgroundColor("purple");
+                }
+                function changeBackgroundColor(color){
+                    document.body.style.backgroundColor = color;
+
+                }
+        
+                
+                document.getElementById("decrease").addEventListener("click", decreaseNumber);
+                document.getElementById("reset").addEventListener("click", resetNumber);
+                document.getElementById("increase").addEventListener("click", increaseNumber);
+        
+                
+                updateDisplay();
+            </script>
+        </body>
+        

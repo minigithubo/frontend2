@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #inputBox {
+            width: 400px;
+            height: 30px;
+            background: rgb(242, 242, 247);
+            border-radius: 5px;
+            border: 1px solid #9e9999; /* Adds a slight border */
+            padding: 10px; /* Adds spacing inside the box */
+            font-size: 16px; /* Text size */
+            outline: none;
+            position: relative;
+            left: 370px;
+        }
+        #inputBox::placeholder{
+            font-size: 16pt;
+        }
+        #inputBox2{
+            width: 200px;
+            height: 50px;
+            background: #333; /* Background color */
+            color: white; /* Text color set to white */
+            border-radius: 5px;
+            border: none; /* Removes default button border */
+            font-size: 30px; /* Adjust font size */
+            position: relative;
+            left: 370px;
+        }
+        #inputBox2:hover{
+            background: #555;
+
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+            background-color: #f5f5f5;
+            
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        h2{
+            font-size: 16pt;
+            position: relative;
+            left: 370px;
+            
+        }
+        hr{
+            width: 500px;
+            position: relative;
+            right: 300px;
+        }
+        #itemList {
+            margin: 20px auto;
+            width: 400px;
+        }
+        .item-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgb(242, 242, 247);
+            border: 1px solid #9e9999;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+        .remove-btn{
+            color:red;
+        }
+        .filterItems1{
+            font-size: 16pt;
+            font-weight: lighter;
+        }
+        #clearAll{
+            position: relative;
+            left: 370px;
+            width: 400px;
+            height: 50px;
+            border-radius: 5px;
+            border: 1px solid #9e9999;
+            
+        }
+         /* class = . , id == #  css*/
+    </style>
+</head>
+<body>
+    <center> <h1><img src="pic_trulli.jpg" style="vertical-align: middle;"> Shopping List </h1></center>
+        <input id="inputBox" type="text" placeholder="Enter Item">
+        <p><input id ="inputBox2" type = "button" value ="Add item"></p>
+         <!-- Hidden initially (html)--> 
+         <h2 id="filterItems">Filter Items<hr></h2>
+         <div id="itemList"></div>
+         <button id="clearAll">Clear All</button>
+</body>
+<script>
+
+ const addButton = document.querySelector("#inputBox2");
+ const inputBox = document.querySelector("#inputBox");
+ const itemList = document.querySelector("#itemList");
+ const clearAllButton = document.querySelector("#clearAll");
+ const filterItems2 = document.querySelector("#filterItems");
+
+
+
+
+        // Function to check if input is empty
+
+        addButton.addEventListener("click", function () {
+
+            const text = inputBox.value.trim();
+
+            
+            // Get value from the text input, (javascript)
+            if (text === "") {
+                alert("Please fill Necessary fields.");
+                return;
+
+            }
+            alert(text);
+
+            filterItems.style.display = "block";
+            clearAllButton.style.display = "block";
+
+          
+            const filterList = document.createElement("div");
+            filterList.className = "filterItems1";
+
+            const itemBox = document.createElement("div");
+            itemBox.className = "item-box";
+
+            // Add text to the item box
+            const itemText = document.createElement("span");
+            itemText.textContent = text;
+
+            // Add a remove button to the item box
+            const removeBtn = document.createElement("span");
+            removeBtn.className = "remove-btn";
+            removeBtn.textContent = "✖";
+
+            removeBtn.addEventListener("click", function () {
+                itemList.removeChild(itemBox);
+                checkEmptyList();
+            });
+
+            // Append to the item box
+            itemBox.appendChild(itemText);
+            itemBox.appendChild(removeBtn);
+
+            // Append to the list
+            itemList.appendChild(itemBox);
+
+            // Clear input box
+            inputBox.value = "";
+        });
+
+        // Clear All Items
+
+        const clearAll = document.createElement("span");
+            removeBtn.className = "clearAll2";
+     
+
+        clearAllButton.addEventListener("click", function () {
+            itemList.innerHTML = "";
+            checkEmptyList();
+        });
+
+        // Check if the list is empty
+        function checkEmptyList() {
+            if (itemList.children.length === 0) {
+                filterItems.style.display = "none";
+                clearAllButton.style.display = "none";
+            }
+        }
+
+</script>
+</html>

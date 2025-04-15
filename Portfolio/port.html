@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            background-color: #f4f4f4;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            width: 90%;
+            height: 100%; /* Ensure both sections take full height of viewport */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .left-section {
+            background-color: #333;
+            color: #fff;
+            width: 30%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .left-section img {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .left-section h2 {
+            margin: 10px 0;
+            font-size: 24px;
+        }
+
+        .left-section p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .left-section .contact,
+        .left-section .education,
+        .left-section .hobbies {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .left-section h3 {
+            border-bottom: 1px solid #555;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .right-section {
+            width: 70%;
+            padding: 20px;
+            background-color: #fff; /* Ensure white box styling */
+            overflow-y: auto; /* Allow scrolling if content exceeds the height */
+        }
+
+        .right-section h2,
+        .right-section h4 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .right-section .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .right-section .skill {
+            background: #e0e0e0;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .projects {
+            margin-top: 20px;
+        }
+
+        .project {
+            margin-bottom: 20px;
+        }
+
+        .project h5 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #007BFF;
+        }
+
+        .project p {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .project ul {
+            margin: 0;
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+
+        .project li {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .hobbies-icons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        .hobbies-icons img {
+            width: 40px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <img src="IMG_1614.png" alt="Profile Picture">
+            <h2>Minhee Kim</h2>
+            <p>Software engineer (Frontend)</p>
+
+            <div class="contact">
+                <h3>Contact</h3>
+                <p>Phone: 206 795 4392</p>
+                <p>Email: minhee.kim@bellevuecollege.edu</p>
+                <p>Address: Seattle, Wa</p>
+            </div>
+
+            <div class="education">
+                <h3>Education</h3>
+                <p>2023 - 2025: Computer Science, Bellevue college</p>
+                <p>2025 - 2027: Computer Science , University of washington</p>
+            </div>
+
+            
+        </div>
+
+        <div class="right-section">
+            <h2>Profile</h2>
+            <p>"Falling down is not a failure. Failure comes when you stay where you have fallen." - Socrates</p>
+
+            <h4>Experience</h4>
+            <p><strong>Nothing yet, but excited to build impactful solutions!</strong></p>
+
+            <h4>Skills</h4>
+            <div class="skills">
+                <div class="skill">Java</div>
+                <div class="skill">JavaScript</div>
+                <div class="skill">C++</div>
+                <div class="skill">Python</div>
+                <div class="skill">Vue.js</div>
+                <div class="skill">Django</div>
+                <div class="skill">REST APIs</div>
+            </div>
+        
+            <h4>Projects</h4>
+            <div class="projects">
+                <div class="project">
+                    <h5>UsersIDs | Java</h5>
+                    <p><strong>Class Project</strong> | Bellevue, WA | 02/2023 – 03/2023</p>
+                    <ul>
+                        <li>Designed a system to generate unique IDs following specific rules by reading and validating input from a file ("IDs.txt").</li>
+                        <li>Implemented error handling to ensure incorrect inputs were flagged and handled gracefully.</li>
+                    </ul>
+                </div>
+        
+                <div class="project">
+                    <h5>ListPeople | Java</h5>
+                    <p><strong>Class Project</strong> | Bellevue, WA | 01/2022 – 02/2023</p>
+                    <ul>
+                        <li>Created a program to list and filter individuals based on attributes such as role (student/teacher), gender, and age.</li>
+                        <li>Enabled flexible data visualization through customizable filters.</li>
+                    </ul>
+                </div>
+        
+                <div class="project">
+                    <h5>BC Computer Programming Club Website | Vue.js, Django, REST Framework, Python</h5>
+                    <p><strong>Club Project</strong> | Bellevue, WA | 12/2022 – 02/2023</p>
+                    <ul>
+                        <li>Led a team of 30 members to design and deploy a dynamic website for 276 club members.</li>
+                        <li>Built Django models to store club news and project data, enabling real-time updates via the admin interface.</li>
+                        <li>Integrated Vue.js for an interactive frontend and REST API endpoints for seamless data communication.</li>
+                    </ul>
+                </div>
+        
+                <div class="project">
+                    <h5>Stack Operation | Java</h5>
+                    <p><strong>Class Project</strong> | Bellevue, WA | 02/2023 – 03/2023</p>
+                    <ul>
+                        <li>Developed a tool for evaluating and converting mathematical expressions, including syntax validation, infix-to-postfix conversion, and interactive evaluation.</li>
+                    </ul>
+                </div>
+        
+                <div class="project">
+                    <h5>BurgerJ | Java</h5>
+                    <p><strong>Class Project</strong> | Bellevue, WA | 03/2024 – 04/2024</p>
+                    <ul>
+                        <li>Enhanced a menu system with functionality to update prices based on real-time weather and currency changes.</li>
+                        <li>Implemented features for managing promotions, toppings, and pricing localization.</li>
+                    </ul>
+                </div>
+        
+                <div class="project">
+                    <h5>Analysis English | Java, Weka</h5>
+                    <p><strong>Own Project</strong> | Bellevue, WA | 09/2024 – 11/2024</p>
+                    <ul>
+                        <li>Designed a machine learning application using Weka to predict student grades based on assessments in writing, vocabulary, listening, and reading.</li>
+                        <li>Conducted validation and testing to ensure reliability, achieving X% accuracy (add a specific number if possible).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    <script>
+    function sieve(n){
+    
+    let primes = [2];
+    
+    for(let i = 3; i <= n; i++){
+        let isPrime = true;
+        for( let j = 2; j < i ; j++){
+            if(i % j == 0 ){
+                isPrime = false; //! 껏다 켯다 반복
+            }
+            
+        }
+        if(isPrime){
+            primes.push(i);
+        
+        }
+    }
+    console.log(primes);
+}
+sieve(100);
+</script>
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+
+[[redirects]]
+  from = "/*"
+  to = "/catAp.html"
+  status = 200

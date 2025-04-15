@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <title>speedREader </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="">
+    <style>
+        body{
+            background-color: #c7e2e2;
+            font-size: 36pt;
+        }
+        div{
+            width: 80%;
+            height: 100px;
+            font-size: 36pt;
+            font-weight: bold;
+            font-family: monospace;
+            line-height: 100px;
+            text-align: center;
+    
+            border: 2px solid #8EBEBE;
+            border-radius: 5px;
+            
+            background-color: #FFFFFF;
+            display: flex; /* To center text vertically */
+            justify-content: center; /* To center text horizontally */
+            align-items: center; /* To center text vertically */
+            height: 100px; /* Matches line-height for uniformity */
+            box-sizing: border-box; /* Ensures padding doesn't overflow */
+        }
+        .rectangle {
+            height: 130px;
+            width: 1000px;
+            background-color: white;
+            border-radius: 10px;
+            outline-color: #8EBEBE;
+        
+        }
+        h2, h3, h4{
+             font-size: 13pt;
+             position: relative ;
+             left: 300px;
+             display: inline-block;
+             margin-right: 50px;
+        }
+        h5{
+            font-size: 13pt;
+            position: relative ;
+            left: 200px;
+           
+            
+        }
+        textarea{
+            position: relative ;
+            left: 200px;
+            height: 130px;
+            width: 800px;
+        }
+
+    </style>
+    <body>
+        <content>
+            <p>
+            <center>
+                SpeedReader
+                </center>
+            </p>
+    </content>
+      <p>
+        <center> <div class = "rectangle"></div> </center>
+      </p>
+
+    <h2>Play Controls: <hr>
+       <p>
+         <button onclick ="start-btn">Start</button>
+         <button onclick ="stop-btn" disabled>Stop</button>
+       </p>
+     </h2>
+     <h3>Speed: <hr>
+        <p><select id="speed-select"></p>
+          <option value="1200">50 wpm</option>
+          <option value="200">300 wpm</option>
+          <option value="171" selected>350 wpm</option>
+          <option value="150">400 wpm</option>
+          <option value="133">450 wpm</option>
+          <option value="120">500 wpm</option>
+        </select>
+    </h3>
+    <h4>Size: <hr>
+        <p> 
+        <input type="radio" name="size" value="medium" id="size-medium" checked> Medium
+        <input type="radio" name="size" value="big" id="size-big"> Big
+        <input type="radio" name="size" value="bigger" id="size-bigger"> Bigger
+        </p>
+    </h4>
+    <br><h5>Input Text: <hr></h5>
+    <textarea id="inputText" rows="10" cols="80"></textarea>
+    
+
+
+</body>
+
+    <script>
+
+"use strict";
+
+// Select elements from the page
+const displayDiv = document.querySelector(".rectangle");
+const startButton = document.querySelector("#start-btn");
+const stopButton = document.querySelector("#stop-btn");
+const speedSelect = document.querySelector("#speed-select");
+const inputText = document.querySelector("#inputText");//from html
+const sizeRadios = document.querySelectorAll("input[name='size']");//from html
+
+// Variables for animation
+let words = []; // Words to display, it always blank here 
+let currentIndex = 0; // Current word index
+let timer = null; // Timer for animation
+
+// Add event listeners to buttons and controls
+startButton.addEventListener("click", startReading);
+stopButton.addEventListener("click", stopReading);
+speedSelect.addEventListener("change", updateSpeed);
+sizeRadios.forEach((radio) => {
+    radio.addEventListener("change", changeFontSize);
+});
+
+// Function to start the speed reader
+function startReading() {
+    const text = inputText.value.trim(); // Get text from the input box
+    if (text === "") {
+        alert("Please enter some text to start!");
+        return;
+    }
+
+    // Split text into words and reset variables
+    words = text.split(/\s+/); // Split on spaces or newlines
+    currentIndex = 0;
+
+    // Disable buttons and start timer
+    startButton.disabled = true;
+    stopButton.disabled = false;
+    inputText.disabled = true;
+
+    const speed = parseInt(speedSelect.value); // Get speed from dropdown
+    timer = setInterval(showNextWord, speed);
+}
+
+// Function to stop the speed reader
+function stopReading() {
+    clearInterval(timer); // Stop the timer
+    timer = null;
+
+    // Clear the display and reset buttons
+    displayDiv.textContent = "";
+    startButton.disabled = false;
+    stopButton.disabled = true;
+    inputText.disabled = false;
+}
+
+// Function to show the next word
+function showNextWord() {
+    if (currentIndex >= words.length) {
+        stopReading(); // Stop if all words are displayed
+        return;
+    }
+
+    displayDiv.textContent = words[currentIndex]; // Display the current word
+    currentIndex++;
+}
+
+// Function to change the font size
+function changeFontSize() {
+    const selectedSize = document.querySelector("input[name='size']:checked").value;
+
+    if (selectedSize === "medium") {
+        displayDiv.style.fontSize = "36pt";
+    } else if (selectedSize === "big") {
+        displayDiv.style.fontSize = "48pt";
+    } else if (selectedSize === "bigger") {
+        displayDiv.style.fontSize = "60pt";
+    }
+}
+
+// Function to update the speed dynamically
+function updateSpeed() {
+    if (timer) {
+        clearInterval(timer); // Restart the timer with the new speed
+        const speed = parseInt(speedSelect.value);
+        timer = setInterval(showNextWord, speed);
+    }
+}
+
+
+</script>
