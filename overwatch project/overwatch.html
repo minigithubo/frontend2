@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Overwatch Heroes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  
+    <div class="buttons">
+        <button id="all-btn" class="filter-btn active" onclick="filterHeroes('all')">ALL</button>
+        <button id="tank-btn" class="filter-btn" onclick="filterHeroes('tank')">TANK</button>
+        <button id="damage-btn" class="filter-btn" onclick="filterHeroes('damage')">DAMAGE</button>
+        <button id="support-btn" class="filter-btn" onclick="filterHeroes('support')">SUPPORT</button>
+    </div>
+    
+   
+    <p id="role-description">Select a role to see the heroes.</p>
+    
+ 
+    <div id="hero-container"></div>
+
+    <!-- Link to the external JS file -->
+    <script src="app.js"></script>
+</body>
+</html>
